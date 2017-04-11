@@ -13,7 +13,7 @@ var allowCors = function(req, res, next){
     next();
 }
 
-app.listen(5000);
+app.listen(3000);
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({
     extended: true

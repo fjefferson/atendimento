@@ -5,3 +5,4 @@ O sistema terá uma tela de painel de chamado, com múltiplos clientes, ou seja,
 # Tecnologias
  - NodeJS
  - AngularJS
+ - MongoDB

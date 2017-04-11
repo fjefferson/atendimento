@@ -2,24 +2,26 @@
 var express = require("express");
 var clienteController = require('../controllers/cliente');
 var validator = require('validator');
-var routers = express.Router();
+var routersCliente = express.Router();
 
 
-routers.get('/',function(req, res){
+routersCliente.get('/',function(req, res){
     clienteController.lista(function (response) {
         res.json(response);
     });
 });
 
 
-routers.post('/', function(req, res){
+routersCliente.post('/', function(req, res){
     res.json({gravar: 'Vamos gravar!'});
 });
 
-routers.get('/login', function(req, res){
-    clienteController.login(req.params,function(response){
+
+routersCliente.get('/login', function(req, res){
+    var params = req.headers;
+    clienteController.login(params,function(response){
         res.json(response);
     });
 });
 
-module.exports = routers;
+module.exports = routersCliente;

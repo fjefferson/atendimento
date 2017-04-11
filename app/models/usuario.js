@@ -27,4 +27,7 @@ module.exports = function () {
 
 
     });
+
+    var Usuario = mongoose.model('Usuario',schema);
+    return Usuario;
 }

@@ -1,8 +1,9 @@
 var db = require("../../config/database");
-var controller = {};
+var validator = require('validator');
+var controllerCliente = {};
 
 
-controller.lista = function(callback){
+controllerCliente.lista = function(callback){
         
        db.Cliente.find({},function (error,cliente) {
             if(!error){
@@ -14,12 +15,24 @@ controller.lista = function(callback){
     }
 
 
+controllerCliente.login = function(params,callback){
+    db.Usuario.findOne({'emailUsuario': params.email,'senhaUsuario': params.senha},function(error, usuario){
+        if(!error){
+            console.log(usuario);
+            if(usuario != null){
+                callback(usuario);
+            }else{
+                callback({negative:'usuario não encontrado, tente novamente!'});
+            }
+        }else{
+            callback({error:'Houve algum erro ao solicitar essa ação.'});
+        }
+    });
 
-controller.login = function(params,callback){
-    callback({login:'sucesso!','params':params});
+    
 }
 
 
 
 
-module.exports = controller;
+module.exports = controllerCliente;
