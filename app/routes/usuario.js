@@ -20,4 +20,12 @@ routersUsuario.post('/', function(req, res){
 });
 
 
+routersUsuario.delete('/',function(req, res){
+    usuarioController.remove(req.body.id,function(response){
+        res.json(response);
+    });
+});
+
+
+
 module.exports = routersUsuario;

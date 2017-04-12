@@ -6,7 +6,7 @@ var controllerUsuario = {};
 controllerUsuario.lista = function(callback){
     db.Usuario.find({},function(error, usuarios){
         if(!error){
-            callback({'usuarios': usuarios, success: 'Tudo certo!'});
+            callback(usuarios);
         }else{
             callback({error:'Não foi possivel solicitar essa ação!'});
         }
@@ -29,5 +29,19 @@ controllerUsuario.adiciona = function(param, callback){
     });
     
 };
+
+controllerUsuario.remove = function(_id,callback){
+    db.Usuario.findById(_id,function(error, usuario){
+        if(!error){
+            usuario.remove(function(error){
+                if(!error){
+                    callback({response:"Usuário removido!"});
+                }
+            });
+        }else{
+              callback({error:"Usuário não foi removido removido!"});
+        }
+    });
+}
 
 module.exports = controllerUsuario;
