@@ -16,10 +16,9 @@ controllerUsuario.lista = function(callback){
 
 controllerUsuario.adiciona = function(param, callback){
     db.Usuario({
-        'nomeUsuario': param.nomeUsuario,
-        'emailUsuario': param.emailUsuario,
-        'senhaUsuario': param.senhaUsuario,
-        'clienteUsuario': param.clienteUsuario
+        'nomeUsuario': param.nome,
+        'emailUsuario': param.email,
+        'senhaUsuario': param.senha
     }).save(function(error, usuario){
         if(!error){
           callback({success:'Usuario criado!','usuario':usuario});
@@ -43,5 +42,28 @@ controllerUsuario.remove = function(_id,callback){
         }
     });
 }
+
+
+controllerUsuario.edita = function(params, callback){
+    db.Usuario.findById(params.id, function(error, usuario){
+        if(params.nome){
+            usuario.nomeUsuario = params.nome;
+        }
+
+        if(params.senha){
+            usuario.senhaUsuario = params.senha;
+        }
+
+        usuario.save(function(error, usuario){
+            if(!error){
+                callback(usuario);
+            }else{
+                callback({error: error});
+            }
+        });
+    
+    });
+};
+
 
 module.exports = controllerUsuario;

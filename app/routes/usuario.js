@@ -7,6 +7,7 @@ var routersUsuario = express.Router();
 
 
 routersUsuario.get('/', function(req, res){
+    console.log(req.headers);
     usuarioController.lista(function(response){
         res.json(response);
     });
@@ -17,6 +18,13 @@ routersUsuario.post('/', function(req, res){
     usuarioController.adiciona(param,function(response){
         res.json(response);
     });
+});
+
+
+routersUsuario.put('/', function(req, res){
+    usuarioController.edita(req.body,function(response){
+        res.json(response);
+    }); 
 });
 
 

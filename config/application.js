@@ -4,6 +4,9 @@
 var express = require("express");
 var app = module.exports = express();
 var bodyParse = require("body-parser");
+var auth = require('http-auth');
+var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
+
 
 var allowCors = function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -13,12 +16,14 @@ var allowCors = function(req, res, next){
     next();
 }
 
-app.listen(3000);
+var port = process.env.port || 3000;
+
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({
     extended: true
 }));
-
 app.use(express.static('./public'))
 app.use(allowCors);
+
+app.listen(port);
 
